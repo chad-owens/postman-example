@@ -1,0 +1,116 @@
+{
+  "info": {
+    "name": "postman-example",
+    "_postman_id": "41d16626-df08-2a34-bafe-bbf99cf12c93",
+    "description": "",
+    "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+  },
+  "item": [
+    {
+      "_postman_id": "298d29da-89c7-c5bd-a103-ad5b17e31573",
+      "name": "GET Google",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "var jsonData = JSON.parse(responseBody);",
+              "",
+              "tests[\"Status 200\"] = responseCode.code === 200;",
+              "",
+              "tests[\"Success\"] = jsonData.success === true;",
+              "tests[\"Location String\"] = jsonData.response.locationString === \"Mountain View, CA\";",
+              "",
+              "// Loop through employers array and find exact match",
+              "for (i = 0; i < jsonData.response.employers.length; i ++) {",
+              "    console.log(i);",
+              "    console.log(jsonData.response.employers[i].name);",
+              "    ",
+              "    if (jsonData.response.employers[i].exactMatch === true) {",
+              "        console.log(\"Found Google!\");",
+              "        break;",
+              "    }",
+              "}",
+              "",
+              "tests[\"Exact Match\"] = jsonData.response.employers[i].exactMatch === true;",
+              "",
+              "tests[\"Employers Name\"] = jsonData.response.employers[i].name === \"Google\";",
+              "",
+              "tests[\"Industry\"] = jsonData.response.employers[i].industry === \"Internet\";",
+              "",
+              "tests[\"Overall Rating\"] = jsonData.response.employers[i].overallRating !== undefined;"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {},
+        "url": {
+          "raw": "http://api.glassdoor.com/api/api.htm?v=1&format=json&t.p=227349&t.k=iEqRCowbdCE&action=employers&q=Google&userip=192.168.43.42&useragent=Mozilla/%2F4.0&l=Mountain View, CA",
+          "protocol": "http",
+          "host": [
+            "api",
+            "glassdoor",
+            "com"
+          ],
+          "path": [
+            "api",
+            "api.htm"
+          ],
+          "query": [
+            {
+              "key": "v",
+              "value": "1",
+              "equals": true
+            },
+            {
+              "key": "format",
+              "value": "json",
+              "equals": true
+            },
+            {
+              "key": "t.p",
+              "value": "227349",
+              "equals": true
+            },
+            {
+              "key": "t.k",
+              "value": "iEqRCowbdCE",
+              "equals": true
+            },
+            {
+              "key": "action",
+              "value": "employers",
+              "equals": true
+            },
+            {
+              "key": "q",
+              "value": "Google",
+              "equals": true
+            },
+            {
+              "key": "userip",
+              "value": "192.168.43.42",
+              "equals": true
+            },
+            {
+              "key": "useragent",
+              "value": "Mozilla/%2F4.0",
+              "equals": true
+            },
+            {
+              "key": "l",
+              "value": "Mountain View, CA",
+              "equals": true
+            }
+          ]
+        },
+        "description": ""
+      },
+      "response": []
+    }
+  ]
+}
